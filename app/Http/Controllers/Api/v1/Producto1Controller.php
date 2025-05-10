@@ -23,11 +23,11 @@ class Producto1Controller extends Controller
     public function store(Request $request)
     {
         //para saber que se va a almacenar
-        $datos = $Request->validate([
+        $datos = $request->validate([
             'nombre'=>['required','string','max:100'],
-            'descripcion'=>['nullable','string','max=250'],
-            'precio'=>['required','integer','min=100'],
-            'cantidad'=>['required','integer','min=1'],
+            'descripcion'=>['nullable','string','max:250'],
+            'precio'=>['required','integer','min:100'],
+            'cantidad'=>['required','integer','min:1'],
         ]);
         //guardar validacion de datos en DB
         $producto=Producto1::create($datos);
@@ -54,14 +54,15 @@ class Producto1Controller extends Controller
     public function update(Request $request, Producto1 $producto1)
     {
         //validación para actualizar los datos
-        $datos = $Request->validate([
+        $datos = $request->validate([
             'nombre'=>['required','string','max:100'],
-            'descripcion'=>['nullable','string','max=250'],
-            'precio'=>['required','integer','min=100'],
-            'cantidad'=>['required','integer','min=1'],
+            'descripcion'=>['nullable','string','max:250'],
+            'precio'=>['required','integer','min:100'],
+            'cantidad'=>['required','integer','min:1'],
         ]);
-        //guardar validacion de datos en DB
-        $producto=Producto1::update($datos);
+        // Actualizar los datos en la instancia del producto
+        $producto1->update($datos);  // Aquí estamos utilizando la instancia ya obtenida
+        
 
         //Respuesta al usuario 
         return response()->json([
@@ -82,6 +83,6 @@ class Producto1Controller extends Controller
         return response()->json([
             'success'=>true,
             'message'=>'El producto fue eliminado con exito',
-        ],200);
+        ],200);  
     }
 }
