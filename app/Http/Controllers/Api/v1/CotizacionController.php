@@ -4,10 +4,11 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Cotizacion;
 
 class CotizacionController extends Controller
 {
-    ///// Obtener todas las cotizaciones
+    //Obtener todas las cotizaciones
     public function index()
     {
         return Cotizacion::all();  // Devuelve todas las cotizaciones
@@ -18,10 +19,10 @@ class CotizacionController extends Controller
     {
         // Validamos los datos antes de guardar
         $request->validate([
-            'cliente_id' => 'required|exists:clientes,id',  // Aseguramos que el cliente exista
-            'producto' => 'required|string',
-            'cantidad' => 'required|integer|min:1',
-            'precio_estimado' => 'required|numeric|min:0',
+        'cliente_id' => 'required|exists:clientes,id',  // Aseguramos que el cliente exista
+        'producto_id' => 'required|exists:producto1s,id',
+        'fecha' => 'required|date',
+        'precio' => 'required|numeric',
         ]);
 
         // Creamos la cotización con los datos validados

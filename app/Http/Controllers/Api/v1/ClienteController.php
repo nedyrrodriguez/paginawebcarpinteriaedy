@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class ClienteController extends Controller
 {
-    //Mostrar todos los clientes
    // Obtener todos los clientes
     public function index()
     {
