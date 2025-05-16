@@ -18,6 +18,11 @@ class Producto1Factory extends Factory
     {
         return [
             //
+            'nombre'=>fake()->word(),
+            'descripcion'=>fake()->text(),
+            'precio'=>fake()->numberBetween(10000,1000000),
+            'cantidad'=>fake()->numberBetween(1,50),
+        
         ];
     }
 }

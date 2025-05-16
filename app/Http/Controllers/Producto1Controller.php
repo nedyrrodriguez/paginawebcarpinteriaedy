@@ -8,19 +8,20 @@ use Illuminate\Http\Request;
 class Producto1Controller extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Para visualizar los productos
      */
     public function index()
     {
         //
+        $producto1s = Producto1::all();
+        return view('productos.index', compact('producto1s'));
+         return view('productos.create');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+   // Método para mostrar el formulario de creación
     public function create()
     {
-        //
+        return view('productos.create');
     }
 
     /**
@@ -29,6 +30,15 @@ class Producto1Controller extends Controller
     public function store(Request $request)
     {
         //
+        $validated = $request->validate([
+        'nombre' => 'required|string|max:255',
+        'descripcion' => 'required|string',
+        'precio' => 'required|numeric',
+    ]);
+
+    Producto1::create($validated);
+
+    return redirect()->route('productos.index')->with('success', 'Producto creado correctamente');
     }
 
     /**
@@ -60,6 +70,8 @@ class Producto1Controller extends Controller
      */
     public function destroy(Producto1 $producto1)
     {
-        //
+        $producto1->delete();
+
+    return redirect()->route('productos.index')->with('success', 'Producto eliminado');
     }
 }

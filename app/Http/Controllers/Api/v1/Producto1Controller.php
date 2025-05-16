@@ -8,13 +8,12 @@ use Illuminate\Http\Request;
 
 class Producto1Controller extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        //Creando funcionalidad para el método index
-        return response()->json(Producto1::all(), 200); //mostrar todos los productos creados
+
+        $producto1s = Producto1::all();
+        return view('producto.index', compact('producto1s'));
     }
 
     /**
@@ -28,6 +27,7 @@ class Producto1Controller extends Controller
             'descripcion'=>['nullable','string','max:250'],
             'precio'=>['required','integer','min:100'],
             'cantidad'=>['required','integer','min:1'],
+            'cliente_id' => ['required', 'exists:clientes,id'],
         ]);
         //guardar validacion de datos en DB
         $producto=Producto1::create($datos);

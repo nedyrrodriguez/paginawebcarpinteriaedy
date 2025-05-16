@@ -2,14 +2,25 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Cliente extends Model
 {
-    protected $table = 'clientes';  // Asegúrate de que este sea el nombre correcto de la tabla
-    protected $fillable = ['nombre', 'telefono', 'correo']; // según las columnas
-    // Si necesitas relaciones, agrégalas aquí (por ejemplo, si un cliente tiene cotizaciones)
+    use HasFactory;
+
+    // Los campos que pueden ser asignados masivamente
+    protected $fillable = ['nombre','correo','telefono'];
+
+    // Relación con productos: un cliente puede tener muchos productos
+    public function productos()
+    {
+        return $this->hasMany(Producto1::class);
+    }
+
+    // Relación con cotizaciones: un cliente puede tener muchas cotizaciones
     public function cotizaciones()
-   { return $this->hasMany(Cotizacion::class, 'cliente_id');
-}
+    {
+        return $this->hasMany(Cotizacion::class);
+    }
 }
