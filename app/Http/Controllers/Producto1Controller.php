@@ -15,7 +15,6 @@ class Producto1Controller extends Controller
         //
         $producto1s = Producto1::all();
         return view('productos.index', compact('producto1s'));
-         return view('productos.create');
     }
 
    // Método para mostrar el formulario de creación

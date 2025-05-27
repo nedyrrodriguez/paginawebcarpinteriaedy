@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('content')
+@section('contenido')
 <h1 class="text-3xl font-bold mb-6 text-center">Lista de Productos</h1>
 
 <!-- Botón Nuevo Producto -->

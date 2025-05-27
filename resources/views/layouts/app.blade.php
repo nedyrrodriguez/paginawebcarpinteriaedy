@@ -1,32 +1,44 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>La Carpintería de Edy</title>
-    @vite('resources/css/app.css')
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>{{ config('app.name', 'Laravel') }}</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+
+    <!-- Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script src="https://unpkg.com/lucide@latest/dist/lucide.min.js"></script>
+
 </head>
-<body class="bg-blue-950 text-white min-h-screen flex flex-col">
+<body class="font-sans antialiased bg-blue-900 text-white">
+    <div class="min-h-screen">
+        @include('layouts.navigation')
 
+        <!-- Encabezado de página -->
+        @hasSection('cabecera')
+            <header class="bg-white text-gray-800 shadow">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    @yield('cabecera')
+                </div>
+            </header>
+        @endif
 
-<header class="p-4 bg-blue-800 text-white text-center font-bold text-xl">
-    La Carpintería, las curiosidades de Edy
-</header>
-
-<main class="flex-grow p-4">
-    <h1 class="text-3xl font-bold mb-6 text-center">
-        @yield('cabecera', 'La Carpintería, las curiosidades de Edy')
-    </h1>
-
-    @yield('content')
-</main>
-
-
-<footer class="p-4 bg-blue-800 text-center text-white">
-    &copy; 2025 La Carpintería Edy
-</footer>
+        <!-- Contenido de la página -->
+        <main class="p-4">
+            @yield('contenido')
+        </main>
+    </div>
+    <script>
+  window.addEventListener('DOMContentLoaded', () => {
+    lucide.replace();
+  });
+</script>
 
 </body>
 </html>
-
-
